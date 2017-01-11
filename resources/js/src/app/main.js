@@ -12,15 +12,29 @@ vueApp = new Vue({
 
         $(window).scroll(function()
         {
+            var scroll = $(window).scrollTop();
+            var topBarSlider = $(".top-bar-slider");
+
             if ($(".wrapper-main").hasClass("isSticky"))
             {
-                if ($(this).scrollTop() > 1)
+                if (scroll >= 200)
                 {
                     $(".wrapper-main").addClass("sticky");
+
+                    setTimeout(function()
+                    {
+                        topBarSlider.slideDown(300);
+                    }, 1);
                 }
-                else
+                else if ($(".wrapper-main").hasClass("sticky"))
                 {
-                    $(".wrapper-main").removeClass("sticky");
+                    topBarSlider.slideUp(300);
+
+                    setTimeout(function()
+                    {
+                        $(".wrapper-main").removeClass("sticky");
+                        topBarSlider.removeAttr("style");
+                    }, 300);
                 }
             }
         });
