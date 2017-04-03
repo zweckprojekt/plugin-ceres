@@ -31,10 +31,14 @@
     {{ component( "Ceres::ItemList.Components.ItemListSorting") }}
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
     {{ component( "Ceres::ItemList.Components.Pagination") }}
+    {{ component( "Ceres::PageDesign.Components.CategorySideMenu") }}
+    {{ component( "Ceres::PageDesign.Components.CategorySideMenuNode") }}
+
+    {% set categories = services.category.getNavigationTree("item", lang) %}
 
     <resource name="facetParams" :data="[]"></resource>
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
-    <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
+    <resource name="itemList" :data="{ total: {{ paginatedResult.total | json_encode() }} }"></resource>
 
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">
@@ -48,8 +52,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
-                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
+                            <item-list-sorting template="#vue-item-list-sorting"
+                                               :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
+                            <items-per-page template="#vue-items-per-page"
+                                            :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
                             <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
@@ -61,14 +67,23 @@
         </div>
 
         {#<div class="m-b-3">#}
-            {#{% include "Ceres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}#}
+        {#{% include "Ceres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}#}
         {#</div>#}
         <div class="row">
-            <div class="col-xs-12">
+
+            {% if config("Ceres.item.show_sidebar") == "true" %}
+                <div class="col-xs-3 hidden-md-down">
+                    <category-side-menu :navigation-tree="{{ categories | json_encode() }}"
+                                        template="#vue-category-side-menu"></category-side-menu>
+                </div>
+            {% endif %}
+
+            <div class="col-xs-{% if config("Ceres.item.show_sidebar") == "true" %}9{% else %}12{% endif %}">
+                {#<div class="col-xs-12">#}
 
                 <ul id="twig-rendered-item-list" class="product-list row grid" v-is-loading-watcher>
                     {% for item in itemList %}
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if config("Ceres.item.show_sidebar") == "true" %}4{% else %}3{% endif %}">
                             {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
                         </li>
                     {% endfor %}

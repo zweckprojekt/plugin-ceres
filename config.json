@@ -191,6 +191,13 @@
         "default"   : "false"
     },
     {
+      "tab"       : "Item view",
+      "key"       : "item.show_sidebar",
+      "label"     : "Show sidebar navigation in category item list",
+      "type"      : "checkbox",
+      "default"   : "false"
+    },
+    {
         "tab"                           : "Shopping cart",
         "key"                           : "basket.item_data",
         "label"                         : "Show item information",
