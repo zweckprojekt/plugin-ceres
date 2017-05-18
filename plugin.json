@@ -358,6 +358,11 @@
             "description"   : "Add content after the 'Order now' button in the checkout."
         },
         {
+            "key"           : "Checkout.CustomAddressField",
+            "name"          : "Checkout: Address field container",
+            "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page."
