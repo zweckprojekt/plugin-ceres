@@ -1495,6 +1495,8 @@ Vue.component("create-update-address", {
                 }
 
                 this.waiting = false;
+            }.bind(this)).fail(function () {
+                this.waiting = false;
             }.bind(this));
         },
 
@@ -1512,6 +1514,8 @@ Vue.component("create-update-address", {
 
                 this.$dispatch("new-address-created", this.addressData);
 
+                this.waiting = false;
+            }.bind(this)).fail(function () {
                 this.waiting = false;
             }.bind(this));
         }
