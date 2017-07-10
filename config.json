@@ -1,5 +1,11 @@
 [
     {
+        "tab"       : "Global",
+        "key"       : "global.shippingCostsCategoryId",
+        "label"     : "Category to display shipping information",
+        "type"      : "category_select"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
@@ -73,37 +79,37 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory1",
-        "label"     : "ID of the category to display in the first category preview",
+        "label"     : "Category to display in the first category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory2",
-        "label"     : "ID of the category to display in the second category preview",
+        "label"     : "Category to display in the second category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory3",
-        "label"     : "ID of the category to display in the first list of items",
+        "label"     : "Category to display in the first list of items",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory4",
-        "label"     : "ID of the category to display in the third category preview",
+        "label"     : "Category to display in the third category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory5",
-        "label"     : "ID of the category to display in the fourth category preview",
+        "label"     : "Category to display in the fourth category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory6",
-        "label"     : "ID of the category to display in the second list of items",
+        "label"     : "Category to display in the second list of items",
         "type"      : "category_select"
     },
 
@@ -141,6 +147,18 @@
         "label"     : "Fix the navigation bar at the top of the page",
         "type"      : "checkbox",
         "default"   : "true"
+    },
+    {
+        "tab"           : "Footer",
+        "key"           : "footer.to_top_button",
+        "label"         : "Position of the Back-to-top button",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "right"          : "On the right at the bottom",
+            "bottom"         : "In the middle at the bottom"
+        },
+        "default"       : "right"
     },
     {
         "tab"           : "Footer",
@@ -300,6 +318,13 @@
     },
     {
         "tab"       : "Item view",
+        "key"       : "item.enable_image_carousel",
+        "label"     : "Enable image carousel for category item list",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"       : "Item view",
         "key"       : "item.category_show_dots",
         "label"     : "Show image carousel dots in category item list",
         "type"      : "checkbox",
@@ -345,13 +370,13 @@
         "type"                          : "multi_select",
         "possibleValues"                :
         {
-          "basket.item.item_id"         : "Item ID",
-          "basket.item.description"     : "Description",
-          "basket.item.availability"    : "Availability",
-          "basket.item.customNumber"    : "Variation number",
-          "basket.item.state"           : "Condition"
+          "basket.item.item_id"          : "Item ID",
+          "basket.item.description_short": "Preview text",
+          "basket.item.description_long" : "Item text",
+          "basket.item.availability"     : "Availability",
+          "basket.item.customNumber"     : "Variation number"
         },
-        "default"                       : "all"
+        "default"                       : "basket.item.item_id, basket.item.description_short, basket.item.availability, basket.item.customNumber"
     },
     {
         "tab"                               : "Shopping cart",
@@ -395,11 +420,17 @@
         "default"   : "false"
     },
     {
-        "tab"       : "Shopping cart",
-        "key"       : "basket.add_item_to_basket_confirm",
-        "label"     : "Add to shopping cart: Show overlay",
-        "type"      : "checkbox",
-        "default"   : "true"
+        "tab"               : "Shopping cart",
+        "key"               : "basket.add_item_to_basket_confirm",
+        "label"             : "Add to shopping cart: Show information",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "overlay"       : "Show overlay",
+            "preview"       : "Toggle shopping cart preview",
+            "no_information": "No information"
+        },
+        "default"           : "overlay"
     },
     {
         "tab"               : "Pagination and sorting",
@@ -463,66 +494,285 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "item.id_asc"                       : "Item ID (ascending)",
-            "item.id_desc"                      : "Item ID (descending)",
-            "texts.name1_asc"                   : "Item name (ascending)",
-            "texts.name1_desc"                  : "Item name (descending)",
-            "item.position_asc"                 : "Item position (ascending)",
-            "item.position_desc"                : "Item position (descending)",
-            "item.salesPrice.price_asc"         : "Price (ascending)",
-            "item.salesPrice.price_desc"        : "Price (descending)",
-            "variation.createdAt_asc"           : "Newest variation",
-            "variation.createdAt_desc"          : "Oldest variation",
-            "variation.id_asc"                  : "Variation ID (ascending)",
-            "variation.id_desc"                 : "Variation ID (descending)",
-            "variation.number_asc"              : "Variation number (ascending)",
-            "variation.number_desc"             : "Variation number (descending)",
-            "variation.updatedAt_asc"           : "Last variation update",
-            "variation.updatedAt_desc"          : "First variation update",
-            "variation.position_asc"            : "Variation position (ascending)",
-            "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "default.recommended_sorting"               : "Recommended",
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
-        "default"                   : "texts.name1_asc, texts.name1_desc, itemPrice_asc"
+        "default"                   : "texts.name1_asc, texts.name1_desc, item.salesPrices.price_asc, item.salesPrices.price_desc"
     },
     {
         "tab"                       : "Pagination and sorting",
         "key"                       : "sort.defaultSorting",
-        "label"                     : "Default item sorting by",
+        "label"                     : "Default sorting value for category view",
         "type"                      : "dropdown",
         "possibleValues"            :
         {
-            "item.id_asc"                       : "Item ID (ascending)",
-            "item.id_desc"                      : "Item ID (descending)",
-            "texts.name1_asc"                   : "Item name (ascending)",
-            "texts.name1_desc"                  : "Item name (descending)",
-            "item.position_asc"                 : "Item position (ascending)",
-            "item.position_desc"                : "Item position (descending)",
-            "item.salesPrice.price_asc"         : "Price (ascending)",
-            "item.salesPrice.price_desc"        : "Price (descending)",
-            "variation.createdAt_asc"           : "Newest variation",
-            "variation.createdAt_desc"          : "Oldest variation",
-            "variation.id_asc"                  : "Variation ID (ascending)",
-            "variation.id_desc"                 : "Variation ID (descending)",
-            "variation.number_asc"              : "Variation number (ascending)",
-            "variation.number_desc"             : "Variation number (descending)",
-            "variation.updatedAt_asc"           : "Last variation update",
-            "variation.updatedAt_desc"          : "First variation update",
-            "variation.position_asc"            : "Variation position (ascending)",
-            "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "default.recommended_sorting"               : "Recommended",
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
         "default"                   : "texts.name1_asc"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.priorityCategory1",
+        "label"         : "Recommended item sorting: First sorting value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "texts.name_asc"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.priorityCategory2",
+        "label"         : "Recommended item sorting: Second sorting value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "notSelected"                               : "Not selected",
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "notSelected"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.priorityCategory3",
+        "label"         : "Recommended item sorting: Third sorting value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "notSelected"                               : "Not selected",
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "notSelected"
+    },
+    {
+        "tab"                       : "Pagination and sorting",
+        "key"                       : "sort.defaultSortingSearch",
+        "label"                     : "Default sorting value for search results",
+        "type"                      : "dropdown",
+        "possibleValues"            :
+        {
+            "item.score"                                : "Relevance",
+            "default.recommended_sorting"               : "Recommended",
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
+        },
+        "default"                   : "item.score"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.prioritySearch1",
+        "label"         : "Recommended search results: First search value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "item.score"                                : "Relevance",
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "item.score"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.prioritySearch2",
+        "label"         : "Recommended search results: Second search value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "notSelected"                               : "Not selected",
+            "item.score"                                : "Relevance",
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "notSelected"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "sorting.prioritySearch3",
+        "label"         : "Recommended search results: Third search value",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "notSelected"                               : "Not selected",
+            "item.score"                                : "Relevance",
+            "item.id_asc"                               : "Item ID ⬆",
+            "item.id_desc"                              : "Item ID ⬇",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
+            "item.position_asc"                         : "Item position ⬆",
+            "item.position_desc"                        : "Item position ⬇",
+            "item.salesPrice.price_asc"                 : "Price ⬆",
+            "item.salesPrice.price_desc"                : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.id_asc"                          : "Variation ID ⬆",
+            "variation.id_desc"                         : "Variation ID ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "variation.position_asc"                    : "Variation position ⬆",
+            "variation.position_desc"                   : "Variation position ⬇",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
+            "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+        },
+        "default"       : "notSelected"
     },
     {
         "tab"               : "Checkout and My account",
@@ -534,78 +784,154 @@
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.show",
-        "label"                     : "Show invoice address fields in address form",
+        "label"                     : "Show invoice address fields in address form (DE)",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "billing_address.name1"               : "Company",
-            "billing_address.vatNumber"             : "VAT number",
-            "billing_address.birthday"             : "Date of birth",
-            "billing_address.name4"             : "Name affix",
-            "billing_address.address3"          : "Additional address 1 / Building name (EN)",
-            "billing_address.address4"    : "Additional address 2",
-            "billing_address.stateId" : "State",
-            "billing_address.salutation":"Salutation",
-            "billing_address.title":"Title"
+            "billing_address.name1"     : "Company",
+            "billing_address.vatNumber" : "VAT number",
+            "billing_address.birthday"  : "Date of birth",
+            "billing_address.name4"     : "Name affix",
+            "billing_address.address3"  : "Additional address 1",
+            "billing_address.address4"  : "Additional address 2",
+            "billing_address.stateId"   : "State",
+            "billing_address.salutation": "Form of address",
+            "billing_address.title"     :"Title"
 
         },
-        "default"                   : " billing_address.birthday, billing_address.name4, billing_address.buildingName, billing_address.additionalAddress1"
+        "default"                   : "billing_address.name1, billing_address.salutation"
     },
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.require",
-        "label"                     : "Enable invoice address field validation",
+        "label"                     : "Enable invoice address field validation (DE)",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "billing_address.name1"               : "Company",
-            "billing_address.vatNumber"             : "VAT number",
-            "billing_address.birthday"             : "Date of birth",
-            "billing_address.name4"             : "Name affix",
-            "billing_address.address3"    : "Additional address 1 / Building name",
-            "billing_address.address4"    : "Additional address 2",
-            "billing_address.stateId" : "State",
-            "billing_address.salutation":"Salutation",
-            "billing_address.title":"Title"
+            "billing_address.name1"     : "Company",
+            "billing_address.vatNumber" : "VAT number",
+            "billing_address.birthday"  : "Date of birth",
+            "billing_address.name4"     : "Name affix",
+            "billing_address.address3"  : "Additional address 1",
+            "billing_address.address4"  : "Additional address 2",
+            "billing_address.stateId"   : "State",
+            "billing_address.salutation": "Form of address",
+            "billing_address.title"     : "Title"
 
         },
-        "default"                   : "billing_address.birthday, billing_address.name4, billing_address.address3, billing_address.address4"
+        "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
       "key"                       : "delivery_address.show",
-      "label"                     : "Show delivery address fields in address form",
+      "label"                     : "Show delivery address fields in address form (DE)",
       "type"                      : "multi_select",
       "possibleValues"            :
       {
-        "delivery_address.name1"               : "Company",
-        "delivery_address.name4"             : "Name affix",
-        "delivery_address.address3"          : "Additional address 1 / Building name",
-        "delivery_address.address4"    : "Additional address 2",
-        "delivery_address.stateId" : "State",
-          "delivery_address.salutation":"Salutation",
-          "delivery_address.title":"Title"
+        "delivery_address.name1"      : "Company",
+        "delivery_address.name4"      : "Name affix",
+        "delivery_address.address3"   : "Additional address 1",
+        "delivery_address.address4"   : "Additional address 2",
+        "delivery_address.stateId"    : "State",
+        "delivery_address.salutation" : "Form of address",
+        "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
       "key"                       : "delivery_address.require",
-      "label"                     : "Enable delivery address field validation",
+      "label"                     : "Enable delivery address field validation (DE)",
       "type"                      : "multi_select",
       "possibleValues"            :
       {
-        "delivery_address.name1"               : "Company",
-        "delivery_address.name4"             : "Name affix",
-        "delivery_address.address3"    : "Additional address 1 / Building name",
-        "delivery_address.address4"    : "Additional address 2",
-        "delivery_address.stateId" : "State",
-          "delivery_address.salutation":"Salutation",
-          "delivery_address.title":"Title"
+        "delivery_address.name1"      : "Company",
+        "delivery_address.name4"      : "Name affix",
+        "delivery_address.address3"   : "Additional address 1",
+        "delivery_address.address4"   : "Additional address 2",
+        "delivery_address.stateId"    : "State",
+        "delivery_address.salutation" : "Form of address",
+        "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.show",
+      "label"                     : "Show invoice address fields in address form (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address2"  : "Address 2",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.salutation": "Form of address",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : "billing_address.name1, billing_address.salutation"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.require",
+      "label"                     : "Enable invoice address field validation (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address2"  : "Address 2",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.salutation": "Form of address",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.show",
+      "label"                     : "Show delivery address fields in address form (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address2"  : "Address 2",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.salutation": "Form of address",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.require",
+      "label"                     : "Enable delivery address field validation (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address2"  : "Address 2",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.salutation": "Form of address",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : ""
     },
     {
         "tab"               : "Registration",
@@ -636,7 +962,7 @@
             "log_messages"      : "Log messages",
             "show_error_code"   : "Show error codes"
         },
-        "default"           : ""
+        "default"           : "print_errors, print_success"
     },
     {
         "tab"               : "Logging and performance",
